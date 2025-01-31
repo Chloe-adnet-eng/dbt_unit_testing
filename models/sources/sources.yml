@@ -3,7 +3,7 @@ version: 2
 sources:
   - name: kata  
     database: kata 
-    schema: silver
+    schema: bronze
     tables:
       - name: personnes
         description: "Table contenant les informations des personnes"
