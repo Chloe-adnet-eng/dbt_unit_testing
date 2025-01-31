@@ -1,0 +1,36 @@
+version: 2
+
+models:
+  - name: dim_voitures_toyota
+    description: |
+        Table contenant l'ensemble des voitures Toyota et 
+        des informations sur leur propriétaires
+    columns:
+      - name: voiture_id
+        description: |
+          Identifiant unique de la voiture
+        data_tests:
+          - not_null
+          - unique
+      - name: proprietaire_id
+        description: |
+          Identifiant unique du propriétaire de la voiture
+        data_tests:
+          - not_null
+      - name: nombre_annee_vie
+        description: |
+          Nombre d'années entières pendant lesquelles la voiture à déjà roulé
+      - name: est_revisee
+        description: |
+          Booleen selon lequel la voiture doit réalisé la révision ou non 
+          True si la voiture à plus de 20000km ou que sa mise en circulation est 
+          antérieure au 01-01-2018
+        data_tests: 
+          - not_null
+      - name: nom_proprietaire
+        description: |
+          Nom du propriétaire de la voiture.
+      - name: email_proprietaire
+        description: |
+          Email du propriétaire de la voiture
+

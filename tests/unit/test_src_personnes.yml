@@ -1,0 +1,12 @@
+version: 2
+
+unit_tests:
+  - name: test_src_personnes
+    model: src_personnes
+    given:
+      - input: source('kata', 'personnes') 
+        format: csv
+        fixture: bronze_personnes_emails
+    expect:
+      format: csv
+      fixture: silver_personnes_emails

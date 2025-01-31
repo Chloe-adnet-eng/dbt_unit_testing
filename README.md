@@ -1,15 +1,93 @@
-Welcome to your new dbt project!
+# dbt_unit_testing
 
-### Using the starter project
+Ce projet a pour objectif de tester l'approche **Test-Driven Development (TDD)** avec **dbt** via des tests unitaires. Il permet d'appliquer des tests unitaires sur les modèles SQL pour garantir la qualité et la stabilité de votre code tout au long du développement.
 
-Try running the following commands:
-- dbt run
-- dbt test
+## Installation
+
+Pour installer ce projet et ses dépendances, suivez les étapes ci-dessous :
+
+1. **Installer `uv`** :
+   
+   Exécutez la commande suivante pour installer `uv` :
+
+    ```bash
+    curl -LsSf https://astral.sh/uv/install.sh | sh
+    ```
+
+2. **Créer et activer un environnement virtuel** :
+
+- Créez un environnement virtuel pour ce projet
+
+  ```bash
+      uv venv dbt-unit-testing-venv
+      source dbt-unit-testing-venv/bin/activate
+  ```
+
+- Installez les dépendances du projet 
+
+    ```bash
+    uv sync
+    ```
+
+- Construire la base de donnée locale avec les données source du kata 
+    ```bash
+    make build_database
+    ```
+
+  *Correspond à l'exécution du script `duckdb/main.py`*
 
 
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+3. **Setup `dbt`**
+
+- Editer le dbt `profiles.yml`
+
+  ```bash
+  code ~/.dbt/profiles.yml
+  ```
+
+  Ajustez votre profile dbt pour qu'il pointer sur la database duck_db que vous avez construite! 
+
+    ```yml
+      dbt_unit_testing:
+      target: dev
+      outputs:
+        dev:
+          type: duckdb
+          threads: 1
+          path: <PATH_TO_PROJECT>/dbt_unit_testing/kata.duckdb
+    ```
+
+## Utilisation du repertoire dbt
+
+### 0 - Ajout des extensions 
+
+L'expérience développeur dbt est facilitée par l'ajout de l'extention *Power User for dbt*! 
+Pour ce kata, il vous est fortement recommandé d'installer l'extension.
+
+### 1 - Première exécution 
+
+Lancement de l'exécution des premiers modèles de donnée `src_personnes` et `src_voitures`.
+```bash
+dbt run --select <nom_du_modele>
+```
+
+### 2 - Lancement des tests 
+
+##### 2.1 Test unitaire  
+
+L'ensemble des tests unitaires sont définit dans `/tests/unit` et sont lancés via la commande 
+```bash
+dbt test --select "test_type:unit"
+```
+
+
+##### 2.2 Data test
+
+Les tests data des modèles sont spécifiés dans chaque fichier de configuration associé à un modèle de donnée. Ils se lancent pour un modèle, un dossier ou pour l'ensemble des modèles. 
+
+```bash
+dbt test --select <nom_du_modele>
+```
+
+**Exemple**:
+  Pour le modèle `dim_voitures_toyota`, le calcul du modèle est spécifié dans le fichier `dim_voitures_toyota.sql` et l'ensemble de la documentation et des tests de ce modèle sont spécifiés dans `dim_voitures_toyota.yml`. 
