@@ -19,7 +19,7 @@ Pour installer ce projet et ses dépendances, suivez les étapes ci-dessous :
 Une fois uv installé, créez un environnement virtuel pour ce projet :
 
 ```bash
-    uv venv dbt-unit-testing-venv --python 3.11
+    uv venv dbt-unit-testing-venv
     source dbt-unit-testing-venv/bin/activate
 ```
 
@@ -31,6 +31,8 @@ Dans votre environnement virtuel activé, installez dbt et duckdb, pathlib avec 
 uv pip install dbt
 uv pip install duckdb
 uv pip install pathlib
+uv pip install dbt-core
+uv pip install dbt-duckdb
 ```
 
 4. **Construire la base de donnée locale**:
@@ -38,3 +40,18 @@ uv pip install pathlib
 ```bash 
 python duckdb/main.py
 ```
+
+5. **Editer votre dbt `profiles.yml`**
+```bash
+code ~/.dbt/profiles.yml
+```
+    Ajouter votre profile dbt doit pointer sur la database duck_db que vous avez construite! 
+    dbt_unit_testing:
+```yml
+  target: dev
+  outputs:
+    dev:
+      type: duckdb
+      threads: 1
+      path: <PATH_TO_PROJECT>/dbt_unit_testing/kata.duckdb
+``````

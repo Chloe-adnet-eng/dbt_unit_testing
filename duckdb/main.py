@@ -9,15 +9,16 @@ VOITURES_INPUT = INPUT_PATH / 'voitures.csv'
 # Connexion à la base de données kata.duckdb
 conn = duckdb.connect('kata.duckdb')
 
+conn.execute("CREATE SCHEMA IF NOT EXISTS kata.silver")
 
 tables = conn.execute("SHOW TABLES").fetchall()
 
-personnes_exists = any(table[0] == 'personnes' for table in tables)
+personnes_exists = any(table[0] == 'silver.personnes' for table in tables)
 
 print("⏳ Ajout de la table PERSONNES")
 if not personnes_exists:
     conn.execute("""
-    CREATE TABLE personnes (
+    CREATE TABLE silver.personnes (
         identifiant_personne BIGINT PRIMARY KEY,
         age BIGINT,
         nom TEXT,
@@ -35,7 +36,7 @@ if not personnes_exists:
 
     # Alimentation de la table personnes
     conn.execute(f"""
-    COPY personnes FROM '{PERSONNES_INPUT}' (FORMAT CSV, HEADER TRUE, DELIMITER ',', QUOTE '"');
+    COPY silver.personnes FROM '{PERSONNES_INPUT}' (FORMAT CSV, HEADER TRUE, DELIMITER ',', QUOTE '"');
     """)
     print("2️⃣ Table personnes alimentée!")
 
@@ -43,11 +44,11 @@ else:
     print("Table personnes existe déjà, pas de modification.")
 
 print("⏳ Ajout de la table VOITURES")
-voitures_exists = any(table[0] == 'voitures' for table in tables)
+voitures_exists = any(table[0] == 'silver.voitures' for table in tables)
 
 if not voitures_exists:
     conn.execute("""
-    CREATE TABLE voitures (
+    CREATE TABLE silver.voitures (
         identifiant_voiture BIGINT PRIMARY KEY,
         identifiant_personne BIGINT,  
         nombre_kilometre BIGINT,
@@ -61,7 +62,7 @@ if not voitures_exists:
     print("1️⃣ Table voitures construite!")
 
     conn.execute(f"""
-    COPY voitures FROM '{VOITURES_INPUT}' (FORMAT CSV, HEADER TRUE, DELIMITER ',', QUOTE '"');
+    COPY silver.voitures FROM '{VOITURES_INPUT}' (FORMAT CSV, HEADER TRUE, DELIMITER ',', QUOTE '"');
     """)
     print("2️⃣ Table voitures alimentée!")
 
