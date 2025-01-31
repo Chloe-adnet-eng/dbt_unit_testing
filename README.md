@@ -1,15 +1,32 @@
-Welcome to your new dbt project!
+# dbt_unit_testing
 
-### Using the starter project
+Ce projet a pour objectif de tester l'approche **Test-Driven Development (TDD)** avec **dbt** via des tests unitaires. Il vous permet d'appliquer des tests unitaires sur vos modèles SQL pour garantir la qualité et la stabilité de votre code tout au long du développement.
 
-Try running the following commands:
-- dbt run
-- dbt test
+## Installation
 
+Pour installer ce projet et ses dépendances, suivez les étapes ci-dessous :
 
-### Resources:
-- Learn more about dbt [in the docs](https://docs.getdbt.com/docs/introduction)
-- Check out [Discourse](https://discourse.getdbt.com/) for commonly asked questions and answers
-- Join the [chat](https://community.getdbt.com/) on Slack for live discussions and support
-- Find [dbt events](https://events.getdbt.com) near you
-- Check out [the blog](https://blog.getdbt.com/) for the latest news on dbt's development and best practices
+1. **Installer `uv`** :
+   
+   Exécutez la commande suivante pour installer `uv` :
+
+   ```bash
+   curl -LsSf https://astral.sh/uv/install.sh | sh
+   ```
+
+2. **Créer et activer un environnement virtuel** :
+
+Une fois uv installé, créez un environnement virtuel pour ce projet :
+
+```bash
+    uv venv dbt-unit-testing-venv --python 3.11
+    source dbt-unit-testing-venv/bin/activate
+```
+
+3. **Installer dbt** :
+
+Dans votre environnement virtuel activé, installez dbt avec la commande suivante :
+
+```bash
+uv pip install dbt
+```
