@@ -11,9 +11,9 @@ conn = duckdb.connect('kata.duckdb')
 
 conn.execute("CREATE SCHEMA IF NOT EXISTS kata.silver")
 
-tables = conn.execute("SHOW TABLES").fetchall()
+tables = conn.execute("SHOW ALL TABLES").fetchall()
+personnes_exists = any(table[0] == 'kata' and table[1] == 'silver' and table[2] =='personnes' for table in tables)
 
-personnes_exists = any(table[0] == 'silver.personnes' for table in tables)
 
 print("⏳ Ajout de la table PERSONNES")
 if not personnes_exists:
@@ -44,7 +44,7 @@ else:
     print("Table personnes existe déjà, pas de modification.")
 
 print("⏳ Ajout de la table VOITURES")
-voitures_exists = any(table[0] == 'silver.voitures' for table in tables)
+voitures_exists = any(table[0] == 'kata' and table[1] == 'silver' and table[2] =='voitures' for table in tables)
 
 if not voitures_exists:
     conn.execute("""
@@ -70,3 +70,4 @@ else:
     print("Table voitures existe déjà, pas de modification.")
 
 conn.close()
+

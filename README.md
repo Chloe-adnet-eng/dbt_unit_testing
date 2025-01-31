@@ -28,17 +28,13 @@ Une fois uv installé, créez un environnement virtuel pour ce projet :
 Dans votre environnement virtuel activé, installez dbt et duckdb, pathlib avec les commandes suivantes :
 
 ```bash
-uv pip install dbt
-uv pip install duckdb
-uv pip install pathlib
-uv pip install dbt-core
-uv pip install dbt-duckdb
+uv sync
 ```
 
 4. **Construire la base de donnée locale**:
 
 ```bash 
-python duckdb/main.py
+uv run python duckdb/main.py
 ```
 
 5. **Editer votre dbt `profiles.yml`**
