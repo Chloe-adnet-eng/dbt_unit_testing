@@ -1,7 +1,8 @@
 version: 2
 
 unit_tests:
-  - name: test_src_personnes
+  - name: test_src_personne_emails
+    description: Test si l'email des personnes en silver sont bien redressés
     model: src_personnes
     given:
       - input: source('kata', 'personnes') 
@@ -10,3 +11,14 @@ unit_tests:
     expect:
       format: csv
       fixture: silver_personnes_emails
+
+  - name: test_src_personne_experience
+    description: Test si l'experience des personnes en silver est un entier
+    model: src_personnes
+    given:
+      - input: source('kata', 'personnes') 
+        format: csv
+        fixture: bronze_personnes_experience
+    expect:
+      format: csv
+      fixture: silver_personnes_experience

@@ -1,4 +1,4 @@
-id,age,nom,prenom,email,date_de_naissance,possede_le_permis,fonction,nombre_enfants,xp
-1,30,dupont,jean,jean.dupont@email.com,1990-05-20,TRUE,Développeur,2,5
-2,25,martin,marie,marie.martin@email.com,1995-08-14,FALSE,Designer,0,3
-3,35,durand,paul,paul.durand@email.com,1985-03-30,TRUE,Consultant,3,10
+id,email
+1,jean.dupont@email.com
+2,marie.martin@email.com
+3,paul.durand@email.com
