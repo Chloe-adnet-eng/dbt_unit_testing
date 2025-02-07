@@ -91,3 +91,9 @@ dbt test --select <nom_du_modele>
 
 **Exemple**:
   Pour le modèle `dim_voitures_toyota`, le calcul du modèle est spécifié dans le fichier `dim_voitures_toyota.sql` et l'ensemble de la documentation et des tests de ce modèle sont spécifiés dans `dim_voitures_toyota.yml`. 
+
+## Documentations 
+### 1 Les documentations utiles pour le kata 
+- Unit test avec dbt https://docs.getdbt.com/docs/build/unit-tests
+- Data test avec dbt https://docs.getdbt.com/docs/build/data-tests
+- Le TDD (Ressource notion theodo) https://www.notion.so/m33/ETQDev-je-pratique-le-TDD-16c8f3776f4f80bea77ff57b3376cae4
